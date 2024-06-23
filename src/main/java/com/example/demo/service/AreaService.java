@@ -11,7 +11,7 @@ public interface AreaService {
 	List<AreaEntity> buscarTodosAreas();
 	AreaEntity buscarAreaPorId(Integer id); // el Id
 	AreaEntity buscarAreaPorNombre(String nombre); // el Id
-	void crearArea(AreaEntity usuarioEntity, Model model);
-	void actualizarArea(AreaEntity usuarioEntity, Model model);
+	void crearArea(AreaEntity areaEntity, Model model);
+	void actualizarArea(AreaEntity areaEntity, Model model);
 	void eliminarArea(Integer id);
 }
