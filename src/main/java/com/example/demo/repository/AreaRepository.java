@@ -7,5 +7,5 @@ import com.example.demo.entity.AreaEntity;
 
 @Repository
 public interface AreaRepository extends JpaRepository<AreaEntity, Integer> {
-
+	
 }
