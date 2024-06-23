@@ -10,7 +10,8 @@ import com.example.demo.entity.EmpleadoEntity;
 public interface EmpleadoService {
 	List<EmpleadoEntity> buscarTodosEmpleados();
 	EmpleadoEntity buscarEmpleadoPorDni(String dni); // el Id
+	EmpleadoEntity buscarEmpleadoPorCorreo(String correo); // el Id
 	void crearEmpleado(EmpleadoEntity empleadoEntity, Model model);
-	void actualizarEmpleado(EmpleadoEntity empleadoEntity, Model model, @PathVariable("dni") String dni);
+	void actualizarEmpleado(EmpleadoEntity empleadoEntity, Model model);
 	void eliminarEmpleado(String dni);
 }

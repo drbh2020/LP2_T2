@@ -1,6 +1,7 @@
 package com.example.demo.service.Impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,17 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
 	@Override
 	public EmpleadoEntity buscarEmpleadoPorDni(String dni) {
-		return empleadoRepository.findById(dni).get();
+		
+		try {
+			return empleadoRepository.findById(dni).get();
+		} catch (NoSuchElementException e) {
+			return null;
+		}
+	}
+	
+	@Override
+	public EmpleadoEntity buscarEmpleadoPorCorreo(String correo) {
+		return empleadoRepository.findByCorreo(correo);
 	}
 
 	@Override
@@ -39,15 +50,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 	}
 
 	@Override
-	public void actualizarEmpleado(EmpleadoEntity empleadoEntity, Model model, @PathVariable("dni") String dni) {
-		
-		EmpleadoEntity empleadoExistente = buscarEmpleadoPorDni(dni);
-		
-		if (Utilitarios.areAllFieldsNull(empleadoEntity)) {
-			model.addAttribute("errorMessage", "Los campos no pueden estar vacios");
-			model.addAttribute("empleado", empleadoExistente);
-			model.addAttribute("dni", dni);
-		}
+	public void actualizarEmpleado(EmpleadoEntity empleadoEntity, Model model) {
 		
 		empleadoRepository.save(empleadoEntity);
 		
@@ -58,5 +61,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 	public void eliminarEmpleado(String dni) {
 		empleadoRepository.deleteById(dni);
 	}
+
+
 
 }
