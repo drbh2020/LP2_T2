@@ -2,6 +2,9 @@ package com.example.demo.entity;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.Cascade;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,8 +40,9 @@ public class EmpleadoEntity {
 	@Column(name = "apellido_empleado", length = 45, nullable = false)
 	private String apellido;
 	
-	@Column(name = "fecha_nacimiento", updatable = false, nullable = false)
+	@Column(name = "fecha_nacimiento", nullable = false)
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaNacimiento;
 	
 	@Column(name = "direccion", length = 45, nullable = false)
@@ -47,7 +51,7 @@ public class EmpleadoEntity {
 	@Column(name = "correo", length = 45, unique = true, nullable = false )
 	private String correo;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "area_id", nullable = false)
 	private AreaEntity areaEntity;
 }
