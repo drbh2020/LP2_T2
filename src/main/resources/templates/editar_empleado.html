@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Empleado</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Editar Empleado</h2>
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <span th:text="${errorMessage}"></span>
+    </div>
+    <form th:action="@{/editar_empleado/{id}(id=${empleado.dni})}" th:object="${empleado}" method="post">   
+        <div class="form-group">
+	        <label for="dni">DNI:</label>
+	        <input disabled type="text" class="form-control" id="dni" th:field="*{dni}" placeholder="Ingrese su DNI" required>
+	    </div>
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" th:field="*{nombre}" placeholder="Ingrese su nombre" required>
+        </div>
+        <div class="form-group">
+            <label for="nombre">Apellido:</label>
+            <input type="text" class="form-control" id="apellido" th:field="*{apellido}" placeholder="Ingrese su apellido" required>
+        </div>
+        <div class="form-group">
+            <label for="correo">Correo electrónico:</label>
+            <input type="email" class="form-control" id="correo" th:field="*{correo}" placeholder="Ingrese su correo electrónico" required>
+        </div>
+        <div class="form-group">
+            <label for="direccion">Direccion:</label>
+            <input type="text" class="form-control" id="direccion" th:field="*{direccion}" placeholder="Ingrese su direccion" required>
+        </div>
+        <div class="form-group">
+	        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+	        <input type="date" class="form-control" id="fechaNacimiento" th:field="*{fechaNacimiento}" required>
+	    </div>
+		<div class="form-group">
+        <label for="area">Área:</label>
+        <select class="form-control" id="area" th:field="*{areaEntity}" required>
+            <option value="" disabled selected>Seleccione un área</option>
+            <option th:each="area : ${listaArea}" th:value="${area.areaId}" th:text="${area.nombre}"></option>
+        </select>
+        
+        
+        <a th:href="@{/}" class="btn btn-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </form>
+</div>
+</body>
+</html>
